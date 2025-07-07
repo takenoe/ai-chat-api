@@ -1,7 +1,7 @@
 flask
-langsmith
-pinecone
 langchain
 langchain-openai
 langchain-community
 langchain-pinecone
+pinecone-client>=3.0.0
+langsmith
