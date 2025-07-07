@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from langsmith import Client
-from pinecone import Pinecone
+import pinecone
 from langchain_core.documents import Document
 from langchain_core.runnables import RunnablePassthrough, RunnableParallel, RunnableLambda
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
@@ -23,11 +23,11 @@ langsmith_key = os.environ.get("LANGSMITH_API_KEY")
 client = Client(api_key=langsmith_key)
 embeddings = OpenAIEmbeddings(api_key=openai_key)
 llm = ChatOpenAI(model="gpt-4o-mini", api_key=openai_key)
-pc = Pinecone(environment="us-east-1-aws", api_key=pinecone_key)
+pinecone.init(api_key=pinecone_key, environment="us-east-1-aws")
+index = pinecone.Index(index_name)
 
 # 向量搜索初始化
 index_name = "unlock-your-potential"
-index = pc.Index(index_name)
 vector_store = PineconeVectorStore(
     index=index,
     embedding=embeddings,
