@@ -1,5 +1,5 @@
 flask
 langchain
 langsmith
-pinecone-client
+pinecone
 openai
