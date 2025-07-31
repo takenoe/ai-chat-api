@@ -14,6 +14,15 @@ import os
 # 初始化 Flask 应用
 app = Flask(__name__)
 
+# --- 新增：根路径与健康检查 ---
+@app.get("/")
+def home():
+    return "OK - ai-chat-api is running. Try POST /chat"
+
+@app.get("/health")
+def health():
+    return jsonify(status="ok")
+
 # 从环境变量读取密钥
 openai_key = os.environ.get("OPENAI_API_KEY")
 pinecone_key = os.environ.get("PINECONE_API_KEY")
